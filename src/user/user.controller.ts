@@ -7,6 +7,7 @@ import {
   ParseIntPipe,
   Post,
   Put,
+  Delete,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
@@ -40,10 +41,15 @@ export class UserController {
   }
 
   @Put(':id')
-  async updateOneUserById(
+  updateOneUserById(
     @Param('id', ParseIntPipe) id: number,
     @Body() updateUserDto: UpdateUserDto,
   ) {
     return this.userService.updateOneUserById(id, updateUserDto);
+  }
+
+  @Delete(':id')
+  deleteOneUserById(@Param('id', ParseIntPipe) id: number) {
+    return this.userService.deleteOneUserById(id);
   }
 }
